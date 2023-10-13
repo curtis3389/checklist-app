@@ -1,11 +1,21 @@
 {
   "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "module": "amd",
+    "moduleResolution": "node",
     "noImplicitAny": true,
     "noEmitOnError": true,
+    "outDir": "wwwroot/js",
+    "paths": {
+      "js/*": ["./scripts/*"],
+      "preact": ["./wwwroot/lib/preact/src/index"],
+      "preact/hooks": ["./wwwroot/lib/preact/hooks/src/index"],
+      "preact/jsx-runtime": ["./wwwroot/lib/preact/jsx-runtime/src/index"]
+    },
     "removeComments": false,
     "sourceMap": true,
-    "target": "es5",
-    "outDir": "wwwroot/js"
+    "target": "es5"
   },
   "include": [
     "scripts/**/*"
