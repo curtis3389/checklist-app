@@ -6,11 +6,12 @@
     <title>@ViewData["Title"] - checklist_app</title>
     <script>
       var require = {
-        baseUrl: './',
+        baseUrl: '/',
         paths: {
           'preact': 'lib/preact/dist/preact.umd',
           'preact/hooks': 'lib/preact/hooks/dist/hooks.umd',
-          'preact/jsx-runtime': 'lib/preact/jsx-runtime/dist/jsxRuntime.umd'
+          'preact/jsx-runtime': 'lib/preact/jsx-runtime/dist/jsxRuntime.umd',
+          'preact-router': 'lib/preact-router/dist/preact-router.umd'
         }
       };
     </script>
@@ -18,9 +19,6 @@
 </head>
 <body>
     @RenderBody()
-    <script>
-      require(['js/main'], function () {});
-    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

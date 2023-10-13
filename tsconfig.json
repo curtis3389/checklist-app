@@ -11,7 +11,8 @@
       "js/*": ["./scripts/*"],
       "preact": ["./wwwroot/lib/preact/src/index"],
       "preact/hooks": ["./wwwroot/lib/preact/hooks/src/index"],
-      "preact/jsx-runtime": ["./wwwroot/lib/preact/jsx-runtime/src/index"]
+      "preact/jsx-runtime": ["./wwwroot/lib/preact/jsx-runtime/src/index"],
+      "preact-router": ["./wwwroot/lib/preact-router/index"]
     },
     "removeComments": false,
     "sourceMap": true,
