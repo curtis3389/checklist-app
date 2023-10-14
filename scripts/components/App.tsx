@@ -1,6 +1,6 @@
 import { Router } from 'preact-router';
-import { Home } from 'js/Home';
-import { Error } from 'js/Error';
+import { Home } from 'js/routes/Home';
+import { Error } from 'js/routes/Error';
 
 export const App = () => {
   return (
