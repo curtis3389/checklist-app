@@ -1,5 +1,10 @@
+// Copyright (c) Curtis Hollibaugh. All rights reserved.
+
 import { Checklist } from 'js/models/Checklist';
 
+/**
+ * A repository of checklists.
+ */
 export class ChecklistRepository {
   private checklists: Checklist[] = [
     {
@@ -80,10 +85,41 @@ export class ChecklistRepository {
     },
   ];
 
+  /**
+   * Creates a new checklist with the given title and returns it.
+   * @param title The title of the new checklist.
+   * @returns The newly created checklist.
+   */
+  createChecklistAsync(title: string): Promise<Checklist> {
+    const nextChecklistId = () => (this.checklists
+      .map(checklist => checklist.id)
+      .reduce((previous, current) => {
+        return current > previous
+          ? current
+          : previous;
+      }) + 1);
+    const newChecklist: Checklist = {
+      id: nextChecklistId(),
+      items: [],
+      title,
+    };
+    this.checklists.push(newChecklist);
+    return Promise.resolve(newChecklist);
+  }
+
+  /**
+   * Gets all of the current user's checklists.
+   * @returns All of the current user's checklists.
+   */
   getAllChecklistsAsync(): Promise<Checklist[]> {
     return Promise.resolve(this.checklists);
   }
 
+  /**
+   * Gets the checklist with the given ID.
+   * @param id ID of the checklist to get.
+   * @returns The checklist with the given ID.
+   */
   getChecklistAsync(id: number): Promise<Checklist> {
     return Promise.resolve(this.checklists.filter(checklist => checklist.id === id)[0]);
   }

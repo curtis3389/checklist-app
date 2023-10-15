@@ -1,9 +1,20 @@
+// Copyright (c) Curtis Hollibaugh. All rights reserved.
+
 import { Checklist } from 'js/models/Checklist';
 
+/**
+ * The checklist display props.
+ */
 export interface ChecklistDisplayProps {
+  /**
+   * The checklist to display.
+   */
   checklist?: Checklist,
 }
 
+/**
+ * A checklist display. Allows the user to use a checklist.
+ */
 export const ChecklistDisplay = (props: ChecklistDisplayProps) => {
   const {checklist} = props;
 
