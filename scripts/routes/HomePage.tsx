@@ -9,9 +9,11 @@ import { Layout } from 'js/components/Layout';
 export const HomePage = (_: RoutableProps) => {
   return (
     <div class="row">
-      <Layout.Title documentTitle="chcklst!">
+      <Layout.Header.Left>&nbsp;</Layout.Header.Left>
+      <Layout.Header.Title documentTitle="chcklst!">
         <h1>chcklst!</h1>
-      </Layout.Title>
+      </Layout.Header.Title>
+      <Layout.Header.Right>Menu</Layout.Header.Right>
       <h2>Reusable checklists! Oh my!</h2>
       <p>
         chcklst is here to solve all your checklist needs!

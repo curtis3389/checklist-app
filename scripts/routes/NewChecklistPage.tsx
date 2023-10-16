@@ -5,6 +5,7 @@ import { useState } from 'preact/hooks';
 import { RoutableProps, route } from 'preact-router';
 import { Layout } from 'js/components/Layout';
 import { useChecklistRepository } from 'js/hooks/useChecklistRepository';
+import {BackButton} from "js/components/BackButton";
 
 /**
  * The checklist page. This is where the user uses a checklist.
@@ -27,7 +28,9 @@ export const NewChecklistPage = (_: RoutableProps) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <Layout.Title documentTitle="New Checklist!">New Checklist!</Layout.Title>
+      <Layout.Header.Left><BackButton /></Layout.Header.Left>
+      <Layout.Header.Title documentTitle="New Checklist!">New Checklist!</Layout.Header.Title>
+      <Layout.Header.Right></Layout.Header.Right>
       <label>
         Checklist Name:
         <input type="text" value={name} onInput={onInput} />

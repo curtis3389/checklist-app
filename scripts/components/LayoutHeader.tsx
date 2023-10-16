@@ -1,25 +1,30 @@
 // Copyright (c) Curtis Hollibaugh. All rights reserved.
 
-import { BackButton } from 'js/components/BackButton';
 import { LayoutTitle } from 'js/components/LayoutTitle';
+import {LayoutHeaderLeft} from "js/components/LayoutHeaderLeft";
+import {LayoutHeaderRight} from "js/components/LayoutHeaderRight";
 
-/**
- * The header of the app's layout.
- */
-export const LayoutHeader = () => {
+export const LayoutHeaderComponent = () => {
   return (
     <div class="row">
       <div class="three columns">
-        <BackButton />
+        <LayoutHeaderLeft.Consumer />
       </div>
       <div class="six columns">
         <LayoutTitle.Consumer />
       </div>
       <div class="three columns">
-        Menu
+        <LayoutHeaderRight.Consumer />
       </div>
     </div>
   );
 };
 
-export
+/**
+ * The header of the app's layout.
+ */
+export const LayoutHeader = Object.assign(LayoutHeaderComponent, {
+  Left: LayoutHeaderLeft,
+  Right: LayoutHeaderRight,
+  Title: LayoutTitle,
+});

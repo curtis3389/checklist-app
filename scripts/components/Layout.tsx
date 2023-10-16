@@ -23,16 +23,19 @@ export interface LayoutProps {
  */
 const LayoutComponent = (props: LayoutProps) => {
   const { children } = props;
-  const layoutTitleState = useLayoutTitleState();
 
   return (
     <div class="container">
-      <LayoutTitleStateContext.Provider value={layoutTitleState}>
-        <LayoutHeader />
-        <LayoutBody>
-          { children }
-        </LayoutBody>
-      </LayoutTitleStateContext.Provider>
+      <LayoutTitle.Provider>
+        <LayoutHeader.Left.Provider>
+          <LayoutHeader.Right.Provider>
+            <LayoutHeader />
+            <LayoutBody>
+              { children }
+            </LayoutBody>
+          </LayoutHeader.Right.Provider>
+        </LayoutHeader.Left.Provider>
+      </LayoutTitle.Provider>
     </div>
   );
 };
@@ -52,11 +55,6 @@ export interface LayoutInterface extends LayoutComponentInterface {
    * The header of the layout.
    */
   Header: typeof LayoutHeader;
-
-  /**
-   * Thet title of the layout
-   */
-  Title: typeof LayoutTitle;
 }
 
 /**
@@ -65,5 +63,4 @@ export interface LayoutInterface extends LayoutComponentInterface {
 export const Layout: LayoutInterface = Object.assign(LayoutComponent, {
   Body: LayoutBody,
   Header: LayoutHeader,
-  Title: LayoutTitle,
 });

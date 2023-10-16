@@ -3,8 +3,10 @@
 import { Fragment } from 'preact';
 import { RoutableProps } from 'preact-router';
 import { useChecklist } from 'js/hooks/useChecklist';
+import { BackButton } from "js/components/BackButton";
 import { ChecklistDisplay } from 'js/components/ChecklistDisplay';
 import { Layout } from 'js/components/Layout';
+
 
 /**
  * The checklist page's props.
@@ -25,8 +27,11 @@ export const ChecklistPage = (props: ChecklistPageProps) => {
 
   return (
     <Fragment>
-      <Layout.Title documentTitle={checklist?.title}>{checklist?.title}</Layout.Title>
-      <Layout.Header.Right></Layout.Header.Right>
+      <Layout.Header.Left><BackButton /></Layout.Header.Left>
+      <Layout.Header.Title documentTitle={checklist?.title}>{checklist?.title}</Layout.Header.Title>
+      <Layout.Header.Right>
+        <a className="button button-primary" href={`/checklists/${id}/edit`}>Edit</a>
+      </Layout.Header.Right>
       <ChecklistDisplay checklist={checklist} />
     </Fragment>
   );

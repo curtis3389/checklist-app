@@ -1,6 +1,9 @@
 // Copyright (c) Curtis Hollibaugh. All rights reserved.
 
 import { RoutableProps } from 'preact-router';
+import {Layout} from "js/components/Layout";
+import {BackButton} from "js/components/BackButton";
+import {Fragment} from "preact";
 
 /**
  * The error page.
@@ -8,6 +11,12 @@ import { RoutableProps } from 'preact-router';
  */
 export const ErrorPage = (_: RoutableProps) => {
   return (
-    <h1>Error</h1>
+    <Fragment>
+      <Layout.Header.Left><BackButton /></Layout.Header.Left>
+      <Layout.Header.Title documentTitle="Error">
+        <h1>Error</h1>
+      </Layout.Header.Title>
+      <Layout.Header.Right></Layout.Header.Right>
+    </Fragment>
   );
 }
