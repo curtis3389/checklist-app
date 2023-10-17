@@ -1,0 +1,54 @@
+.checkbox {
+  position: relative;
+  cursor: pointer;
+  padding-left: 40px;
+}
+
+.checkbox__input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.checkbox__input + svg {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  height: 32px;
+  width: 32px;
+}
+
+.checkbox__input + svg .app-icon__box {
+  stroke: black;
+}
+
+.checkbox__input + svg .app-icon__check {
+  display: none;
+}
+
+.checkbox__input:checked + svg .app-icon__check {
+  display: block;
+  stroke: green;
+}
+
+.layout-header {
+  display: flex;
+  align-items: center;
+}
+
+.layout-header__right {
+  display: flex;
+  justify-content: right;
+}
+
+
+.list {
+  list-style: none;
+}
+
+.list > * {
+  margin: 0;
+  padding-bottom: 8px;
+  padding-top: 8px;
+}

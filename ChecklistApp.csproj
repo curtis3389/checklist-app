@@ -28,4 +28,10 @@
     <AdditionalFiles Include="stylecop.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <TypeScriptCompile Remove="scripts\contexts\LayoutTitleStateContext.ts" />
+    <TypeScriptCompile Remove="scripts\hooks\useMyChecklists.ts" />
+    <TypeScriptCompile Remove="scripts\hooks\useChecklist.ts" />
+  </ItemGroup>
+
 </Project>

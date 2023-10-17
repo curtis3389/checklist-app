@@ -29,7 +29,7 @@ export const NewChecklistPage = (_: RoutableProps) => {
   return (
     <form onSubmit={onSubmit}>
       <Layout.Header.Left><BackButton /></Layout.Header.Left>
-      <Layout.Header.Title documentTitle="New Checklist!">New Checklist!</Layout.Header.Title>
+      <Layout.Header.Title documentTitle="chcklst! - New Checklist!">New Checklist!</Layout.Header.Title>
       <Layout.Header.Right></Layout.Header.Right>
       <label>
         Checklist Name:

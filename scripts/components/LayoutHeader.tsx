@@ -6,14 +6,14 @@ import {LayoutHeaderRight} from "js/components/LayoutHeaderRight";
 
 export const LayoutHeaderComponent = () => {
   return (
-    <div class="row">
-      <div class="three columns">
+    <div class="layout-header row">
+      <div class="layout-header__left three columns">
         <LayoutHeaderLeft.Consumer />
       </div>
-      <div class="six columns">
+      <div class="layout-header__title six columns">
         <LayoutTitle.Consumer />
       </div>
-      <div class="three columns">
+      <div class="layout-header__right three columns">
         <LayoutHeaderRight.Consumer />
       </div>
     </div>

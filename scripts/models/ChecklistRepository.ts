@@ -1,12 +1,13 @@
 // Copyright (c) Curtis Hollibaugh. All rights reserved.
 
+import {Dispatch, StateUpdater, useReducer, useState} from 'preact/hooks';
 import { Checklist } from 'js/models/Checklist';
 
 /**
  * A repository of checklists.
  */
 export class ChecklistRepository {
-  private checklists: Checklist[] = [
+  private exampleData: Checklist[] = [
     {
       id: 0,
       items: [
@@ -84,6 +85,14 @@ export class ChecklistRepository {
       title: 'Cholecystectomy',
     },
   ];
+  private readonly checklists: Checklist[];
+  private readonly setChecklists: StateUpdater<Checklist[]>;
+
+  constructor() {
+    const [checklists, setChecklists] = useState(this.exampleData);
+    this.checklists = checklists;
+    this.setChecklists = setChecklists;
+  }
 
   /**
    * Creates a new checklist with the given title and returns it.
@@ -97,22 +106,30 @@ export class ChecklistRepository {
         return current > previous
           ? current
           : previous;
-      }) + 1);
+      }, 0) + 1);
     const newChecklist: Checklist = {
       id: nextChecklistId(),
       items: [],
       title,
     };
-    this.checklists.push(newChecklist);
+    this.setChecklists([...this.checklists, newChecklist])
     return Promise.resolve(newChecklist);
+  }
+
+  /**
+   * Deletes the given checklist.
+   * @param checklist The checklist to delete.
+   */
+  deleteChecklist(checklist: Checklist): void {
+    this.setChecklists(this.checklists.filter(c => c.id !== checklist.id));
   }
 
   /**
    * Gets all of the current user's checklists.
    * @returns All of the current user's checklists.
    */
-  getAllChecklistsAsync(): Promise<Checklist[]> {
-    return Promise.resolve(this.checklists);
+  getAllChecklists(): Checklist[] {
+    return this.checklists;
   }
 
   /**
@@ -120,7 +137,14 @@ export class ChecklistRepository {
    * @param id ID of the checklist to get.
    * @returns The checklist with the given ID.
    */
-  getChecklistAsync(id: number): Promise<Checklist> {
-    return Promise.resolve(this.checklists.filter(checklist => checklist.id === id)[0]);
+  getChecklist(id: number): Checklist {
+    return this.checklists.filter(checklist => checklist.id === id)[0];
+  }
+
+  updateChecklist(newChecklist: Checklist): Checklist {
+    this.setChecklists(this.checklists.map(checklist => checklist.id === newChecklist.id
+      ? newChecklist
+      : checklist));
+    return newChecklist;
   }
 }

@@ -13,7 +13,7 @@ export const HomePage = (_: RoutableProps) => {
       <Layout.Header.Title documentTitle="chcklst!">
         <h1>chcklst!</h1>
       </Layout.Header.Title>
-      <Layout.Header.Right>Menu</Layout.Header.Right>
+      <Layout.Header.Right></Layout.Header.Right>
       <h2>Reusable checklists! Oh my!</h2>
       <p>
         chcklst is here to solve all your checklist needs!

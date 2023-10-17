@@ -13,7 +13,7 @@ export const ErrorPage = (_: RoutableProps) => {
   return (
     <Fragment>
       <Layout.Header.Left><BackButton /></Layout.Header.Left>
-      <Layout.Header.Title documentTitle="Error">
+      <Layout.Header.Title documentTitle="chcklst! - Error">
         <h1>Error</h1>
       </Layout.Header.Title>
       <Layout.Header.Right></Layout.Header.Right>

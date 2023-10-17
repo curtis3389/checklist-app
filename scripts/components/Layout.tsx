@@ -4,8 +4,6 @@ import { ComponentChildren } from 'preact';
 import { LayoutBody } from 'js/components/LayoutBody';
 import { LayoutHeader } from 'js/components/LayoutHeader';
 import { LayoutTitle } from 'js/components/LayoutTitle';
-import { LayoutTitleStateContext } from 'js/contexts/LayoutTitleStateContext';
-import { useLayoutTitleState } from 'js/hooks/useLayoutTitleState';
 
 /**
  * The props for the app's layout.
