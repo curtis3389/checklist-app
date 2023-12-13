@@ -1,13 +1,14 @@
 // Copyright (c) Curtis Hollibaugh. All rights reserved.
 
-import {Dispatch, StateUpdater, useReducer, useState} from 'preact/hooks';
+import {useEffect, useState} from 'preact/hooks';
+import { Subject } from 'rxjs';
 import { Checklist } from 'js/models/Checklist';
 
 /**
  * A repository of checklists.
  */
 export class ChecklistRepository {
-  private exampleData: Checklist[] = [
+  private readonly exampleData: Checklist[] = [
     {
       id: 0,
       items: [
@@ -85,14 +86,9 @@ export class ChecklistRepository {
       title: 'Cholecystectomy',
     },
   ];
-  private readonly checklists: Checklist[];
-  private readonly setChecklists: StateUpdater<Checklist[]>;
-
-  constructor() {
-    const [checklists, setChecklists] = useState(this.exampleData);
-    this.checklists = checklists;
-    this.setChecklists = setChecklists;
-  }
+  private readonly allSubject = new Subject<Checklist[]>;
+  private readonly itemSubjects = new Map<number, Subject<Checklist>>();
+  private checklists: Checklist[] = this.exampleData;
 
   /**
    * Creates a new checklist with the given title and returns it.
@@ -112,7 +108,9 @@ export class ChecklistRepository {
       items: [],
       title,
     };
-    this.setChecklists([...this.checklists, newChecklist])
+    this.checklists = [...this.checklists, newChecklist];
+    this.allSubject.next(this.checklists);
+    this.getItemSubject(newChecklist.id).next(newChecklist);
     return Promise.resolve(newChecklist);
   }
 
@@ -121,7 +119,9 @@ export class ChecklistRepository {
    * @param checklist The checklist to delete.
    */
   deleteChecklist(checklist: Checklist): void {
-    this.setChecklists(this.checklists.filter(c => c.id !== checklist.id));
+    this.checklists = this.checklists.filter(c => c.id !== checklist.id);
+    this.allSubject.next(this.checklists);
+    this.getItemSubject(checklist.id).next(undefined);
   }
 
   /**
@@ -142,9 +142,41 @@ export class ChecklistRepository {
   }
 
   updateChecklist(newChecklist: Checklist): Checklist {
-    this.setChecklists(this.checklists.map(checklist => checklist.id === newChecklist.id
+    this.checklists = this.checklists.map(checklist => checklist.id === newChecklist.id
       ? newChecklist
-      : checklist));
+      : checklist);
+    this.allSubject.next(this.checklists);
+    this.getItemSubject(newChecklist.id).next(newChecklist);
     return newChecklist;
+  }
+
+  useAllChecklists(): Checklist[] {
+    const [allChecklists, setAllChecklists] = useState(this.getAllChecklists());
+
+    useEffect(() => {
+      const subscription = this.allSubject.subscribe(setAllChecklists);
+      return () => subscription.unsubscribe();
+    }, []);
+
+    return allChecklists;
+  }
+
+  useChecklist(id: number): Checklist {
+    const [checklist, setChecklist] = useState(this.getChecklist(id));
+
+    useEffect(() => {
+      const subscription = this.getItemSubject(id).subscribe(setChecklist);
+      return () => subscription.unsubscribe();
+    }, []);
+
+    return checklist;
+  }
+
+  private getItemSubject(id: number) : Subject<Checklist> {
+    if (!this.itemSubjects.has(id)) {
+      this.itemSubjects.set(id, new Subject<Checklist>());
+    }
+
+    return this.itemSubjects.get(id);
   }
 }

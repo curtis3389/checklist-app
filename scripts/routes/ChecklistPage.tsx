@@ -24,7 +24,7 @@ export interface ChecklistPageProps extends RoutableProps {
 export const ChecklistPage = (props: ChecklistPageProps) => {
   const { id } = props;
   const checklistRepository = useChecklistRepository();
-  const checklist = checklistRepository.getChecklist(Number(id));
+  const checklist = checklistRepository.useChecklist(Number(id));
 
   return (
     <Fragment>

@@ -32,6 +32,7 @@
     <TypeScriptCompile Remove="scripts\contexts\LayoutTitleStateContext.ts" />
     <TypeScriptCompile Remove="scripts\hooks\useMyChecklists.ts" />
     <TypeScriptCompile Remove="scripts\hooks\useChecklist.ts" />
+    <TypeScriptCompile Remove="scripts\models\Repository.ts" />
   </ItemGroup>
 
 </Project>

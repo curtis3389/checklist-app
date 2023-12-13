@@ -12,7 +12,7 @@ import {useChecklistRepository} from 'js/hooks/useChecklistRepository';
  */
 export const ChecklistsPage = (_: RoutableProps) => {
   const checklistRepository = useChecklistRepository();
-  const checklists = checklistRepository.getAllChecklists();
+  const checklists = checklistRepository.useAllChecklists();
 
   return (
     <Fragment>

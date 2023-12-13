@@ -16,10 +16,10 @@ export interface EditChecklistPageProps extends RoutableProps {
 export function EditChecklistPage(props: EditChecklistPageProps) {
   const { id } = props;
   const checklistRepository = useChecklistRepository();
-  const checklist = checklistRepository.getChecklist(Number(id));
+  const checklist = checklistRepository.useChecklist(Number(id));
   const deleteChecklist = () => {
     checklistRepository.deleteChecklist(checklist);
-    route('/checklists', true)
+    route('/checklists', true);
   };
   const updateChecklist = (newChecklist: Checklist) => {
     checklistRepository.updateChecklist(newChecklist);
